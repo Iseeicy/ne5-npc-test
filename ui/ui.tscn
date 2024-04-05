@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cf2idensb8y1s"]
+[gd_scene load_steps=2 format=3 uid="uid://cf2idensb8y1s"]
 
 [ext_resource type="Script" path="res://ui/mouse_focus.gd" id="1_fgmvs"]
-[ext_resource type="Script" path="res://ui/interact_cursor.gd" id="2_g4eg1"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -70,4 +69,3 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.785398
 pivot_offset = Vector2(2, 2)
-script = ExtResource("2_g4eg1")

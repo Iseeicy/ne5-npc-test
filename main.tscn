@@ -1,12 +1,20 @@
-[gd_scene load_steps=11 format=3 uid="uid://c0dhor5dsr3r4"]
+[gd_scene load_steps=14 format=3 uid="uid://c0dhor5dsr3r4"]
 
 [ext_resource type="PackedScene" uid="uid://da8f6n0h37ibo" path="res://maps/test_map/test_map.tscn" id="1_i86jl"]
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.virtual-camera/entity_camera_3d.gd" id="1_slvom"]
 [ext_resource type="PackedScene" uid="uid://b4nwduau6uxjr" path="res://addons/netengine5/net.bobbo.player-controller/player_controller.tscn" id="2_6vwec"]
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.virtual-camera/camera_transition.gd" id="2_uarp8"]
 [ext_resource type="PackedScene" uid="uid://cf2idensb8y1s" path="res://ui/ui.tscn" id="3_q0e8w"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.npc/npc_agent_3d.gd" id="4_oqbpm"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.character/character_definition.gd" id="5_soehu"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.player-model/player_model.gd" id="6_fyyy7"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.item/item_inventory.gd" id="7_uu75k"]
+
+[sub_resource type="Resource" id="Resource_ytgj4"]
+script = ExtResource("2_uarp8")
+duration = 0.0
+transition_type = 0
+ease_type = 2
 
 [sub_resource type="Environment" id="Environment_bfew5"]
 background_mode = 1
@@ -23,6 +31,12 @@ default_data = {}
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jbt73"]
 
 [node name="Main" type="Node3D"]
+
+[node name="EntityCamera3D" type="Node3D" parent="."]
+script = ExtResource("1_slvom")
+default_transition = SubResource("Resource_ytgj4")
+
+[node name="Camera3D" type="Camera3D" parent="EntityCamera3D"]
 
 [node name="test_map" parent="." instance=ExtResource("1_i86jl")]
 
