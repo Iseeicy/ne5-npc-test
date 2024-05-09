@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c0dhor5dsr3r4"]
+[gd_scene load_steps=21 format=3 uid="uid://c0dhor5dsr3r4"]
 
 [ext_resource type="PackedScene" uid="uid://da8f6n0h37ibo" path="res://maps/test_map/test_map.tscn" id="1_i86jl"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.virtual-camera/entity_camera_3d.gd" id="1_slvom"]
@@ -9,6 +9,13 @@
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.character/character_definition.gd" id="5_soehu"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.player-model/player_model.gd" id="6_fyyy7"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.item/item_inventory.gd" id="7_uu75k"]
+[ext_resource type="PackedScene" uid="uid://cki8segkyvq7t" path="res://addons/netengine5/net.bobbo.character/agent_scripts/gravity_default.tscn" id="8_ll5tp"]
+[ext_resource type="PackedScene" uid="uid://bpiel1qntfmyh" path="res://addons/netengine5/net.bobbo.character/agent_scripts/jump_default.tscn" id="9_hhg0w"]
+[ext_resource type="Script" path="res://Tester.gd" id="10_ef13e"]
+[ext_resource type="PackedScene" uid="uid://bvg5g5iuv5gvc" path="res://addons/netengine5/net.bobbo.character/agent_scripts/ground_movement_default.tscn" id="10_werxn"]
+[ext_resource type="PackedScene" uid="uid://bysmgnirlwse2" path="res://addons/netengine5/net.bobbo.character/agent_scripts/air_movement_default.tscn" id="11_edwov"]
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.entity-input/simulated_input.gd" id="11_ksg8b"]
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.entity-input/debug/display_simulated_input.gd" id="14_dlbux"]
 
 [sub_resource type="Resource" id="Resource_ytgj4"]
 script = ExtResource("2_uarp8")
@@ -53,10 +60,12 @@ shadow_blur = 0.1
 
 [node name="UI" parent="." instance=ExtResource("3_q0e8w")]
 
-[node name="NPCAgent3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("body_node", "head_node", "inventory", "playermodel", "playermodel_pivot", "collider")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, -4)
+[node name="NPCAgent3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("input", "body_node", "head_node", "inventory", "playermodel", "playermodel_pivot", "collider")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 3.41353, -4)
 script = ExtResource("4_oqbpm")
 character = SubResource("Resource_0lbri")
+agent_scripts = Array[PackedScene]([ExtResource("8_ll5tp"), ExtResource("9_hhg0w"), ExtResource("10_werxn"), ExtResource("11_edwov")])
+input = NodePath("SimulatedInput")
 body_node = NodePath(".")
 head_node = NodePath("Head")
 inventory = NodePath("ItemInventory")
@@ -77,3 +86,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="ItemInventory" type="Node" parent="NPCAgent3D"]
 script = ExtResource("7_uu75k")
+
+[node name="Tester" type="Node" parent="NPCAgent3D" node_paths=PackedStringArray("sim_input")]
+script = ExtResource("10_ef13e")
+sim_input = NodePath("../SimulatedInput")
+
+[node name="Timer" type="Timer" parent="NPCAgent3D/Tester"]
+wait_time = 1.2
+autostart = true
+
+[node name="SimulatedInput" type="Node" parent="NPCAgent3D"]
+script = ExtResource("11_ksg8b")
+
+[node name="DebugDisplay" type="Label" parent="NPCAgent3D/SimulatedInput" node_paths=PackedStringArray("simulated_input")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 8
+text = "1111"
+script = ExtResource("14_dlbux")
+simulated_input = NodePath("..")
+
+[connection signal="timeout" from="NPCAgent3D/Tester/Timer" to="NPCAgent3D/Tester" method="_on_timer_timeout"]
