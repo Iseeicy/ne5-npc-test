@@ -19,6 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Background" type="ColorRect" parent="PauseUI"]
 layout_mode = 1
@@ -27,6 +28,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 0.0784314)
 
 [node name="Label" type="Label" parent="PauseUI"]
@@ -53,6 +55,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Cursor" type="ColorRect" parent="InGameUI"]
 layout_mode = 1
@@ -69,3 +72,4 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = -0.785398
 pivot_offset = Vector2(2, 2)
+mouse_filter = 2

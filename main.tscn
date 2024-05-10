@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c0dhor5dsr3r4"]
+[gd_scene load_steps=22 format=3 uid="uid://c0dhor5dsr3r4"]
 
 [ext_resource type="PackedScene" uid="uid://da8f6n0h37ibo" path="res://maps/test_map/test_map.tscn" id="1_i86jl"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.virtual-camera/entity_camera_3d.gd" id="1_slvom"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bvg5g5iuv5gvc" path="res://addons/netengine5/net.bobbo.character/agent_scripts/ground_movement_default.tscn" id="10_werxn"]
 [ext_resource type="PackedScene" uid="uid://bysmgnirlwse2" path="res://addons/netengine5/net.bobbo.character/agent_scripts/air_movement_default.tscn" id="11_edwov"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.entity-input/simulated_input.gd" id="11_ksg8b"]
+[ext_resource type="PackedScene" uid="uid://x62vcgjprloq" path="res://addons/netengine5/net.bobbo.character/agent_scripts/mouse_look.tscn" id="12_oypxk"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.entity-input/debug/display_simulated_input.gd" id="14_dlbux"]
 
 [sub_resource type="Resource" id="Resource_ytgj4"]
@@ -59,12 +60,13 @@ shadow_enabled = true
 shadow_blur = 0.1
 
 [node name="UI" parent="." instance=ExtResource("3_q0e8w")]
+mouse_filter = 1
 
 [node name="NPCAgent3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("input", "body_node", "head_node", "inventory", "playermodel", "playermodel_pivot", "collider")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 3.41353, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.41353, -4)
 script = ExtResource("4_oqbpm")
 character = SubResource("Resource_0lbri")
-agent_scripts = Array[PackedScene]([ExtResource("8_ll5tp"), ExtResource("9_hhg0w"), ExtResource("10_werxn"), ExtResource("11_edwov")])
+agent_scripts = Array[PackedScene]([ExtResource("8_ll5tp"), ExtResource("9_hhg0w"), ExtResource("10_werxn"), ExtResource("11_edwov"), ExtResource("12_oypxk")])
 input = NodePath("SimulatedInput")
 body_node = NodePath(".")
 head_node = NodePath("Head")
@@ -77,6 +79,7 @@ collider = NodePath("CollisionShape3D")
 shape = SubResource("CapsuleShape3D_jbt73")
 
 [node name="ModelPivot" type="Node3D" parent="NPCAgent3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="PlayerModel" type="Node3D" parent="NPCAgent3D/ModelPivot"]
 script = ExtResource("6_fyyy7")
