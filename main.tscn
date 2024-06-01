@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c0dhor5dsr3r4"]
+[gd_scene load_steps=25 format=3 uid="uid://c0dhor5dsr3r4"]
 
 [ext_resource type="PackedScene" uid="uid://da8f6n0h37ibo" path="res://maps/test_map/test_map.tscn" id="1_i86jl"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.virtual-camera/entity_camera_3d.gd" id="1_slvom"]
@@ -48,6 +48,9 @@ default_data = {}
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jbt73"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_lios2"]
+size = Vector3(1, 0.25, 1)
+
 [node name="Main" type="Node3D"]
 
 [node name="EntityCamera3D" type="Node3D" parent="."]
@@ -76,7 +79,7 @@ shadow_blur = 0.1
 mouse_filter = 1
 
 [node name="NPCAgent3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("nav_agent", "input", "body_node", "head_node", "inventory", "playermodel", "playermodel_pivot", "collider")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.41353, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.879128, 3.41353, -2.04357)
 script = ExtResource("4_oqbpm")
 nav_agent = NodePath("NavigationAgent3D")
 character = SubResource("Resource_0lbri")
@@ -100,6 +103,10 @@ script = ExtResource("6_fyyy7")
 
 [node name="Head" type="Node3D" parent="NPCAgent3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NPCAgent3D/Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.520941)
+mesh = SubResource("BoxMesh_lios2")
 
 [node name="ItemInventory" type="Node" parent="NPCAgent3D"]
 script = ExtResource("7_uu75k")
