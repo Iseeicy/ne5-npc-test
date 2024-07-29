@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bvg5g5iuv5gvc" path="res://addons/netengine5/net.bobbo.character/agent_scripts/ground_movement_default.tscn" id="10_werxn"]
 [ext_resource type="PackedScene" uid="uid://bysmgnirlwse2" path="res://addons/netengine5/net.bobbo.character/agent_scripts/air_movement_default.tscn" id="11_edwov"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.entity-input/simulated_input.gd" id="11_ksg8b"]
-[ext_resource type="PackedScene" uid="uid://x62vcgjprloq" path="res://addons/netengine5/net.bobbo.character/agent_scripts/mouse_look.tscn" id="12_oypxk"]
+[ext_resource type="PackedScene" uid="uid://bvw6t0xq1p8v5" path="res://addons/netengine5/net.bobbo.npc/agent_scripts/npc_look.tscn" id="12_hnwhy"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.entity-input/debug/display_simulated_input.gd" id="14_dlbux"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.npc/npc_state_machine.gd" id="18_yixwn"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.npc/states/follow_target.gd" id="19_fvpaf"]
@@ -83,7 +83,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.879128, 3.41353, -2.04357)
 script = ExtResource("4_oqbpm")
 nav_agent = NodePath("NavigationAgent3D")
 character = SubResource("Resource_0lbri")
-agent_scripts = Array[PackedScene]([ExtResource("8_ll5tp"), ExtResource("9_hhg0w"), ExtResource("10_werxn"), ExtResource("11_edwov"), ExtResource("12_oypxk")])
+agent_scripts = Array[PackedScene]([ExtResource("8_ll5tp"), ExtResource("9_hhg0w"), ExtResource("10_werxn"), ExtResource("11_edwov"), ExtResource("12_hnwhy")])
 input = NodePath("SimulatedInput")
 body_node = NodePath(".")
 head_node = NodePath("Head")
