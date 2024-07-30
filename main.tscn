@@ -133,7 +133,7 @@ simulated_input = NodePath("..")
 
 [node name="NPCStateMachine" type="Node" parent="NPCAgent3D"]
 script = ExtResource("18_yixwn")
-initial_state = NodePath("Follow")
+initial_state = NodePath("GoButton")
 
 [node name="Follow" type="Node" parent="NPCAgent3D/NPCStateMachine" node_paths=PackedStringArray("target")]
 script = ExtResource("19_fvpaf")
