@@ -1,0 +1,17 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=5 format=3 uid="uid://c34kv1325g0qt"]
+
+[ext_resource type="AudioStream" uid="uid://dwjmeh8ugto7d" path="res://npcs/woodbot/sounds/break_1.ogg" id="1_p8p8e"]
+[ext_resource type="AudioStream" uid="uid://cfe06vxjm0b7p" path="res://npcs/woodbot/sounds/break_2.ogg" id="2_bn1sb"]
+[ext_resource type="AudioStream" uid="uid://li085rtbyoyv" path="res://npcs/woodbot/sounds/break_3.ogg" id="3_ql1oj"]
+[ext_resource type="AudioStream" uid="uid://cvsy3pa5prwq3" path="res://npcs/woodbot/sounds/break_4.ogg" id="4_xvu8w"]
+
+[resource]
+streams_count = 4
+stream_0/stream = ExtResource("1_p8p8e")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("2_bn1sb")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("3_ql1oj")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("4_xvu8w")
+stream_3/weight = 1.0
