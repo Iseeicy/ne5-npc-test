@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cg6jngybfjp15"
-path="res://.godot/imported/woodbot.gltf-8c067b48665e153907b3e6b6d65c2a88.scn"
+uid="uid://65lw712qwdnh"
+path="res://.godot/imported/woodbot.gltf-7930bd1df60aa5a642ad32d99500e598.scn"
 
 [deps]
 
-source_file="res://npcs/woodbot/woodbot.gltf"
-dest_files=["res://.godot/imported/woodbot.gltf-8c067b48665e153907b3e6b6d65c2a88.scn"]
+source_file="res://npcs/woodbot/playermodel/woodbot.gltf"
+dest_files=["res://.godot/imported/woodbot.gltf-7930bd1df60aa5a642ad32d99500e598.scn"]
 
 [params]
 

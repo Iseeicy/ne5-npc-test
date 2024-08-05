@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxw7jxvmk8qdn"
-path.bptc="res://.godot/imported/woodbot_Brass.png-95571a2c97bb9f57c2f9268431eb6797.bptc.ctex"
+uid="uid://5e3vvvt3l5uu"
+path.bptc="res://.godot/imported/woodbot_Silver.png-3f9ae771f6abc9ff696f792590b131af.bptc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://npcs/woodbot/woodbot_Brass.png"
-dest_files=["res://.godot/imported/woodbot_Brass.png-95571a2c97bb9f57c2f9268431eb6797.bptc.ctex"]
+source_file="res://npcs/woodbot/playermodel/woodbot_Silver.png"
+dest_files=["res://.godot/imported/woodbot_Silver.png-3f9ae771f6abc9ff696f792590b131af.bptc.ctex"]
 
 [params]
 

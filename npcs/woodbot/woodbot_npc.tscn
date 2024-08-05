@@ -1,0 +1,69 @@
+[gd_scene load_steps=16 format=3 uid="uid://dgbb1dlpkqaxu"]
+
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.npc/npc_agent_3d.gd" id="1_ynkuu"]
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.character/character_definition.gd" id="2_4bgw4"]
+[ext_resource type="PackedScene" uid="uid://cki8segkyvq7t" path="res://addons/netengine5/net.bobbo.character/agent_scripts/gravity_default.tscn" id="3_ol8un"]
+[ext_resource type="PackedScene" uid="uid://bpiel1qntfmyh" path="res://addons/netengine5/net.bobbo.character/agent_scripts/jump_default.tscn" id="4_h5eou"]
+[ext_resource type="PackedScene" uid="uid://bvg5g5iuv5gvc" path="res://addons/netengine5/net.bobbo.character/agent_scripts/ground_movement_default.tscn" id="5_dip7h"]
+[ext_resource type="PackedScene" uid="uid://bysmgnirlwse2" path="res://addons/netengine5/net.bobbo.character/agent_scripts/air_movement_default.tscn" id="6_qwq4m"]
+[ext_resource type="PackedScene" uid="uid://bvw6t0xq1p8v5" path="res://addons/netengine5/net.bobbo.npc/agent_scripts/npc_look.tscn" id="7_girk4"]
+[ext_resource type="PackedScene" uid="uid://bxp6q471n5acx" path="res://npcs/woodbot/woodbot_playermodel.tscn" id="8_qxwc4"]
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.player-model/player_model.gd" id="9_g4n3a"]
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.item/item_inventory.gd" id="10_ummaq"]
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.entity-input/simulated_input.gd" id="11_panht"]
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.npc/npc_state_machine.gd" id="13_g512q"]
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.npc/npc_state.gd" id="14_3qh74"]
+
+[sub_resource type="Resource" id="Resource_0lbri"]
+script = ExtResource("2_4bgw4")
+name = "RUNTIME NPCAgent3D"
+default_data = {}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2fwru"]
+height = 1.15
+
+[node name="WoodbotNPC" type="CharacterBody3D" node_paths=PackedStringArray("nav_agent", "input", "body_node", "head_node", "inventory", "playermodel", "playermodel_pivot", "collider")]
+script = ExtResource("1_ynkuu")
+nav_agent = NodePath("NavigationAgent3D")
+character = SubResource("Resource_0lbri")
+agent_scripts = Array[PackedScene]([ExtResource("3_ol8un"), ExtResource("4_h5eou"), ExtResource("5_dip7h"), ExtResource("6_qwq4m"), ExtResource("7_girk4")])
+input = NodePath("SimulatedInput")
+body_node = NodePath(".")
+head_node = NodePath("Head")
+inventory = NodePath("ItemInventory")
+playermodel = NodePath("ModelPivot/PlayerModel")
+playermodel_pivot = NodePath("ModelPivot")
+collider = NodePath("CollisionShape3D")
+initial_playermodel = ExtResource("8_qxwc4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_2fwru")
+
+[node name="ModelPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.575, 0)
+
+[node name="PlayerModel" type="Node3D" parent="ModelPivot"]
+script = ExtResource("9_g4n3a")
+
+[node name="WoodbotPlayerModel" parent="ModelPivot/PlayerModel" instance=ExtResource("8_qxwc4")]
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="ItemInventory" type="Node" parent="."]
+script = ExtResource("10_ummaq")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+target_desired_distance = 4.0
+avoidance_enabled = true
+debug_enabled = true
+
+[node name="SimulatedInput" type="Node" parent="."]
+script = ExtResource("11_panht")
+
+[node name="NPCStateMachine" type="Node" parent="."]
+script = ExtResource("13_g512q")
+initial_state = NodePath("None")
+
+[node name="None" type="Node" parent="NPCStateMachine"]
+script = ExtResource("14_3qh74")
