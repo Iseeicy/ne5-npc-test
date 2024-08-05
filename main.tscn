@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c0dhor5dsr3r4"]
+[gd_scene load_steps=12 format=3 uid="uid://c0dhor5dsr3r4"]
 
 [ext_resource type="PackedScene" uid="uid://da8f6n0h37ibo" path="res://maps/test_map/test_map.tscn" id="1_i86jl"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.virtual-camera/entity_camera_3d.gd" id="1_slvom"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cf2idensb8y1s" path="res://ui/ui.tscn" id="3_q0e8w"]
 [ext_resource type="PackedScene" path="res://npcs/base_npc.tscn" id="6_bc8n7"]
 [ext_resource type="PackedScene" uid="uid://dgbb1dlpkqaxu" path="res://npcs/woodbot/woodbot_npc.tscn" id="7_3q5nv"]
+[ext_resource type="Texture2D" uid="uid://dvke0e0ts87s3" path="res://maps/test_map/woodbot_detour_point.png" id="8_f7oi3"]
 
 [sub_resource type="Resource" id="Resource_ytgj4"]
 script = ExtResource("2_uarp8")
@@ -65,6 +66,69 @@ gizmo_extents = 1.55
 
 [node name="WoodbotNPC" parent="." instance=ExtResource("7_3q5nv")]
 transform = Transform3D(-0.76392, 0, -0.645311, 0, 1, 0, 0.645311, 0, -0.76392, -6.98352, 3.07716, -6.64331)
+
+[node name="Woodbots" type="Node3D" parent="."]
+
+[node name="SpawnZone" type="Marker3D" parent="Woodbots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.7531, 1.33115, -8.86663)
+gizmo_extents = 1.5
+
+[node name="PointsOfInterest" type="Node3D" parent="Woodbots"]
+
+[node name="POI1" type="Marker3D" parent="Woodbots/PointsOfInterest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.5403, -9.53674e-07, -3.80707)
+gizmo_extents = 0.5
+
+[node name="Decal" type="Decal" parent="Woodbots/PointsOfInterest/POI1"]
+size = Vector3(1, 1, 1)
+texture_albedo = ExtResource("8_f7oi3")
+distance_fade_enabled = true
+distance_fade_begin = 8.0
+distance_fade_length = 8.0
+
+[node name="POI2" type="Marker3D" parent="Woodbots/PointsOfInterest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.47503, -9.53674e-07, -25.0741)
+gizmo_extents = 0.5
+
+[node name="Decal2" type="Decal" parent="Woodbots/PointsOfInterest/POI2"]
+size = Vector3(1, 1, 1)
+texture_albedo = ExtResource("8_f7oi3")
+distance_fade_enabled = true
+distance_fade_begin = 8.0
+distance_fade_length = 8.0
+
+[node name="POI3" type="Marker3D" parent="Woodbots/PointsOfInterest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5244, -9.53674e-07, 19.4778)
+gizmo_extents = 0.5
+
+[node name="Decal3" type="Decal" parent="Woodbots/PointsOfInterest/POI3"]
+size = Vector3(1, 1, 1)
+texture_albedo = ExtResource("8_f7oi3")
+distance_fade_enabled = true
+distance_fade_begin = 8.0
+distance_fade_length = 8.0
+
+[node name="POI4" type="Marker3D" parent="Woodbots/PointsOfInterest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.39938, -9.53674e-07, -9.92879)
+gizmo_extents = 0.5
+
+[node name="Decal4" type="Decal" parent="Woodbots/PointsOfInterest/POI4"]
+size = Vector3(1, 1, 1)
+texture_albedo = ExtResource("8_f7oi3")
+distance_fade_enabled = true
+distance_fade_begin = 8.0
+distance_fade_length = 8.0
+
+[node name="POI5" type="Marker3D" parent="Woodbots/PointsOfInterest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.66056, -1.90735e-06, -2.61823)
+gizmo_extents = 0.5
+
+[node name="Decal5" type="Decal" parent="Woodbots/PointsOfInterest/POI5"]
+size = Vector3(1, 1, 1)
+texture_albedo = ExtResource("8_f7oi3")
+distance_fade_enabled = true
+distance_fade_begin = 8.0
+distance_fade_length = 8.0
 
 [editable path="NavigationRegion3D/test_map"]
 [editable path="NavigationRegion3D/test_map/TestMachine"]
