@@ -1,0 +1,86 @@
+[gd_scene load_steps=18 format=3 uid="uid://tisfxscmgpnu"]
+
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.npc/npc_agent_3d.gd" id="1_sqbvk"]
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.character/character_definition.gd" id="2_8jvh5"]
+[ext_resource type="PackedScene" uid="uid://cki8segkyvq7t" path="res://addons/netengine5/net.bobbo.character/agent_scripts/gravity_default.tscn" id="3_g041j"]
+[ext_resource type="PackedScene" uid="uid://bpiel1qntfmyh" path="res://addons/netengine5/net.bobbo.character/agent_scripts/jump_default.tscn" id="4_adsrh"]
+[ext_resource type="PackedScene" uid="uid://bvg5g5iuv5gvc" path="res://addons/netengine5/net.bobbo.character/agent_scripts/ground_movement_default.tscn" id="5_gu3vu"]
+[ext_resource type="PackedScene" uid="uid://bysmgnirlwse2" path="res://addons/netengine5/net.bobbo.character/agent_scripts/air_movement_default.tscn" id="6_f2y8i"]
+[ext_resource type="PackedScene" uid="uid://bvw6t0xq1p8v5" path="res://addons/netengine5/net.bobbo.npc/agent_scripts/npc_look.tscn" id="7_oww4n"]
+[ext_resource type="PackedScene" uid="uid://buiywmcmet4ip" path="res://addons/netengine5/net.bobbo.player-model/default_player_model.tscn" id="8_di6yo"]
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.player-model/player_model.gd" id="8_sfdyi"]
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.item/item_inventory.gd" id="9_5cbps"]
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.entity-input/simulated_input.gd" id="10_llwfh"]
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.entity-input/debug/display_simulated_input.gd" id="11_f8y8e"]
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.npc/npc_state_machine.gd" id="12_60gml"]
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.npc/npc_state.gd" id="14_j08y1"]
+
+[sub_resource type="Resource" id="Resource_0lbri"]
+script = ExtResource("2_8jvh5")
+name = "RUNTIME NPCAgent3D"
+default_data = {}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jbt73"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_lios2"]
+size = Vector3(1, 0.25, 1)
+
+[node name="NPCAgent3D" type="CharacterBody3D" node_paths=PackedStringArray("nav_agent", "input", "body_node", "head_node", "inventory", "playermodel", "playermodel_pivot", "collider")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.879128, 3.41353, -2.04357)
+script = ExtResource("1_sqbvk")
+nav_agent = NodePath("NavigationAgent3D")
+character = SubResource("Resource_0lbri")
+agent_scripts = Array[PackedScene]([ExtResource("3_g041j"), ExtResource("4_adsrh"), ExtResource("5_gu3vu"), ExtResource("6_f2y8i"), ExtResource("7_oww4n")])
+input = NodePath("SimulatedInput")
+body_node = NodePath(".")
+head_node = NodePath("Head")
+inventory = NodePath("ItemInventory")
+playermodel = NodePath("ModelPivot/PlayerModel")
+playermodel_pivot = NodePath("ModelPivot")
+collider = NodePath("CollisionShape3D")
+initial_playermodel = ExtResource("8_di6yo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_jbt73")
+
+[node name="ModelPivot" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="PlayerModel" type="Node3D" parent="ModelPivot"]
+script = ExtResource("8_sfdyi")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.520941)
+mesh = SubResource("BoxMesh_lios2")
+
+[node name="ItemInventory" type="Node" parent="."]
+script = ExtResource("9_5cbps")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+target_desired_distance = 4.0
+avoidance_enabled = true
+debug_enabled = true
+
+[node name="SimulatedInput" type="Node" parent="."]
+script = ExtResource("10_llwfh")
+
+[node name="DebugDisplay" type="Label" parent="SimulatedInput" node_paths=PackedStringArray("simulated_input")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 8
+text = "1111"
+script = ExtResource("11_f8y8e")
+simulated_input = NodePath("..")
+
+[node name="NPCStateMachine" type="Node" parent="."]
+script = ExtResource("12_60gml")
+initial_state = NodePath("None")
+
+[node name="None" type="Node" parent="NPCStateMachine"]
+script = ExtResource("14_j08y1")

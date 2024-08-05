@@ -1,24 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://c0dhor5dsr3r4"]
+[gd_scene load_steps=10 format=3 uid="uid://c0dhor5dsr3r4"]
 
 [ext_resource type="PackedScene" uid="uid://da8f6n0h37ibo" path="res://maps/test_map/test_map.tscn" id="1_i86jl"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.virtual-camera/entity_camera_3d.gd" id="1_slvom"]
 [ext_resource type="PackedScene" uid="uid://b4nwduau6uxjr" path="res://addons/netengine5/net.bobbo.character.players/first_person_player.tscn" id="2_6vwec"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.virtual-camera/camera_transition.gd" id="2_uarp8"]
 [ext_resource type="PackedScene" uid="uid://cf2idensb8y1s" path="res://ui/ui.tscn" id="3_q0e8w"]
-[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.npc/npc_agent_3d.gd" id="4_oqbpm"]
-[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.character/character_definition.gd" id="5_soehu"]
-[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.player-model/player_model.gd" id="6_fyyy7"]
-[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.item/item_inventory.gd" id="7_uu75k"]
-[ext_resource type="PackedScene" uid="uid://cki8segkyvq7t" path="res://addons/netengine5/net.bobbo.character/agent_scripts/gravity_default.tscn" id="8_ll5tp"]
-[ext_resource type="PackedScene" uid="uid://bpiel1qntfmyh" path="res://addons/netengine5/net.bobbo.character/agent_scripts/jump_default.tscn" id="9_hhg0w"]
-[ext_resource type="PackedScene" uid="uid://bvg5g5iuv5gvc" path="res://addons/netengine5/net.bobbo.character/agent_scripts/ground_movement_default.tscn" id="10_werxn"]
-[ext_resource type="PackedScene" uid="uid://bysmgnirlwse2" path="res://addons/netengine5/net.bobbo.character/agent_scripts/air_movement_default.tscn" id="11_edwov"]
-[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.entity-input/simulated_input.gd" id="11_ksg8b"]
-[ext_resource type="PackedScene" uid="uid://bvw6t0xq1p8v5" path="res://addons/netengine5/net.bobbo.npc/agent_scripts/npc_look.tscn" id="12_hnwhy"]
-[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.entity-input/debug/display_simulated_input.gd" id="14_dlbux"]
-[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.npc/npc_state_machine.gd" id="18_yixwn"]
-[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.npc/states/follow_target.gd" id="19_fvpaf"]
-[ext_resource type="Script" path="res://states/go_to_button.gd" id="19_jl4nh"]
+[ext_resource type="PackedScene" uid="uid://tisfxscmgpnu" path="res://npcs/base_npc.tscn" id="6_bc8n7"]
 
 [sub_resource type="Resource" id="Resource_ytgj4"]
 script = ExtResource("2_uarp8")
@@ -41,16 +28,6 @@ background_color = Color(0.4, 0.4, 0.4, 1)
 ambient_light_source = 2
 ambient_light_color = Color(0.839216, 0.839216, 0.839216, 1)
 ssao_enabled = true
-
-[sub_resource type="Resource" id="Resource_0lbri"]
-script = ExtResource("5_soehu")
-name = "RUNTIME NPCAgent3D"
-default_data = {}
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jbt73"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_lios2"]
-size = Vector3(1, 0.25, 1)
 
 [node name="Main" type="Node3D"]
 
@@ -79,72 +56,7 @@ shadow_blur = 0.1
 [node name="UI" parent="." instance=ExtResource("3_q0e8w")]
 mouse_filter = 1
 
-[node name="NPCAgent3D" type="CharacterBody3D" parent="." node_paths=PackedStringArray("nav_agent", "input", "body_node", "head_node", "inventory", "playermodel", "playermodel_pivot", "collider")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.879128, 3.41353, -2.04357)
-script = ExtResource("4_oqbpm")
-nav_agent = NodePath("NavigationAgent3D")
-character = SubResource("Resource_0lbri")
-agent_scripts = Array[PackedScene]([ExtResource("8_ll5tp"), ExtResource("9_hhg0w"), ExtResource("10_werxn"), ExtResource("11_edwov"), ExtResource("12_hnwhy")])
-input = NodePath("SimulatedInput")
-body_node = NodePath(".")
-head_node = NodePath("Head")
-inventory = NodePath("ItemInventory")
-playermodel = NodePath("ModelPivot/PlayerModel")
-playermodel_pivot = NodePath("ModelPivot")
-collider = NodePath("CollisionShape3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NPCAgent3D"]
-shape = SubResource("CapsuleShape3D_jbt73")
-
-[node name="ModelPivot" type="Node3D" parent="NPCAgent3D"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-
-[node name="PlayerModel" type="Node3D" parent="NPCAgent3D/ModelPivot"]
-script = ExtResource("6_fyyy7")
-
-[node name="Head" type="Node3D" parent="NPCAgent3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="NPCAgent3D/Head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.520941)
-mesh = SubResource("BoxMesh_lios2")
-
-[node name="ItemInventory" type="Node" parent="NPCAgent3D"]
-script = ExtResource("7_uu75k")
-
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="NPCAgent3D"]
-target_desired_distance = 4.0
-avoidance_enabled = true
-debug_enabled = true
-
-[node name="SimulatedInput" type="Node" parent="NPCAgent3D"]
-script = ExtResource("11_ksg8b")
-
-[node name="DebugDisplay" type="Label" parent="NPCAgent3D/SimulatedInput" node_paths=PackedStringArray("simulated_input")]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 8
-text = "1111"
-script = ExtResource("14_dlbux")
-simulated_input = NodePath("..")
-
-[node name="NPCStateMachine" type="Node" parent="NPCAgent3D"]
-script = ExtResource("18_yixwn")
-initial_state = NodePath("GoButton")
-
-[node name="Follow" type="Node" parent="NPCAgent3D/NPCStateMachine" node_paths=PackedStringArray("target")]
-script = ExtResource("19_fvpaf")
-target = NodePath("../../../PlayerController")
-max_distance = 3.0
-repath_rate = 0.1
-
-[node name="GoButton" type="Node" parent="NPCAgent3D/NPCStateMachine" node_paths=PackedStringArray("button", "button_parent")]
-script = ExtResource("19_jl4nh")
-button = NodePath("../../../NavigationRegion3D/test_map/TestMachine/MachineBody/MachinePanel/ButtonBot/StaticBody3D/Interactable")
-button_parent = NodePath("../../../NavigationRegion3D/test_map/TestMachine/MachineBody/MachinePanel/ButtonBot/StaticBody3D/CollisionShape3D")
+[node name="NPCAgent3D" parent="." instance=ExtResource("6_bc8n7")]
 
 [node name="Target" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.04875, 1.99552, -6.70559)
