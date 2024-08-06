@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dgbb1dlpkqaxu"]
+[gd_scene load_steps=18 format=3 uid="uid://dgbb1dlpkqaxu"]
 
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.npc/npc_agent_3d.gd" id="1_ynkuu"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.character/character_definition.gd" id="2_4bgw4"]
@@ -13,6 +13,8 @@
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.entity-input/simulated_input.gd" id="11_panht"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.npc/npc_state_machine.gd" id="13_g512q"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.npc/npc_state.gd" id="14_3qh74"]
+[ext_resource type="Script" path="res://npcs/woodbot/npc_states/go_to_detour.gd" id="14_wpu4s"]
+[ext_resource type="Script" path="res://npcs/woodbot/npc_states/go_to_lighthouse.gd" id="15_n2kwi"]
 
 [sub_resource type="Resource" id="Resource_0lbri"]
 script = ExtResource("2_4bgw4")
@@ -56,6 +58,7 @@ script = ExtResource("10_ummaq")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 target_desired_distance = 4.0
 avoidance_enabled = true
+radius = 5.0
 debug_enabled = true
 
 [node name="SimulatedInput" type="Node" parent="."]
@@ -63,7 +66,13 @@ script = ExtResource("11_panht")
 
 [node name="NPCStateMachine" type="Node" parent="."]
 script = ExtResource("13_g512q")
-initial_state = NodePath("None")
+initial_state = NodePath("GoToDetour")
 
 [node name="None" type="Node" parent="NPCStateMachine"]
 script = ExtResource("14_3qh74")
+
+[node name="GoToDetour" type="Node" parent="NPCStateMachine"]
+script = ExtResource("14_wpu4s")
+
+[node name="GoToLighthouse" type="Node" parent="NPCStateMachine"]
+script = ExtResource("15_n2kwi")

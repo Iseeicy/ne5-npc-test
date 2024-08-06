@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://btyrsw5bg3rm3"]
+
+[ext_resource type="PackedScene" uid="uid://bre6gbpejhdcb" path="res://maps/test_map/lighthouse/light_house.gltf" id="1_7hebl"]
+
+[node name="Lighthouse" type="Node3D"]
+
+[node name="light_house" parent="." instance=ExtResource("1_7hebl")]
+
+[node name="POI" type="Marker3D" parent="." groups=["lighthouse_poi"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.323956, 0)
+gizmo_extents = 2.0

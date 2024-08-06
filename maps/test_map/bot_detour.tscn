@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dabdamnnu6vps"]
+
+[ext_resource type="Texture2D" uid="uid://dvke0e0ts87s3" path="res://maps/test_map/woodbot_detour_point.png" id="1_l15ul"]
+
+[node name="BotDetour" type="Marker3D" groups=["bot_detour"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.5403, -9.53674e-07, -3.80707)
+gizmo_extents = 0.5
+metadata/_edit_group_ = true
+
+[node name="Decal" type="Decal" parent="."]
+size = Vector3(1, 1, 1)
+texture_albedo = ExtResource("1_l15ul")
+distance_fade_enabled = true
+distance_fade_begin = 8.0
+distance_fade_length = 8.0
