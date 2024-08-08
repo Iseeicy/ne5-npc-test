@@ -2,18 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5e3vvvt3l5uu"
-path.bptc="res://.godot/imported/woodbot_Silver.png-3f9ae771f6abc9ff696f792590b131af.bptc.ctex"
+uid="uid://dqkbo6qoxu6qb"
+path.bptc="res://.godot/imported/Silver.png-1e879255fc84a91c5075341c0cba558f.bptc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={}
 
 [deps]
 
-source_file="res://npcs/woodbot/playermodel/woodbot_Silver.png"
-dest_files=["res://.godot/imported/woodbot_Silver.png-3f9ae771f6abc9ff696f792590b131af.bptc.ctex"]
+source_file="res://npcs/woodbot/playermodel/Silver.png"
+dest_files=["res://.godot/imported/Silver.png-1e879255fc84a91c5075341c0cba558f.bptc.ctex"]
 
 [params]
 

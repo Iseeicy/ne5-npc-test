@@ -2,18 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqq2hau6pnbfv"
-path.bptc="res://.godot/imported/woodbot_Brass.png-053d47f0e2b9624f776cc9453b1ad1a1.bptc.ctex"
+uid="uid://ct64otqfj4mfw"
+path.bptc="res://.godot/imported/WoodPlanks1.png-f28b0d787edc381942e6c4f4b0612414.bptc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={}
 
 [deps]
 
-source_file="res://npcs/woodbot/playermodel/woodbot_Brass.png"
-dest_files=["res://.godot/imported/woodbot_Brass.png-053d47f0e2b9624f776cc9453b1ad1a1.bptc.ctex"]
+source_file="res://npcs/woodbot/playermodel/WoodPlanks1.png"
+dest_files=["res://.godot/imported/WoodPlanks1.png-f28b0d787edc381942e6c4f4b0612414.bptc.ctex"]
 
 [params]
 

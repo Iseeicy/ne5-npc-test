@@ -2,18 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cs10q2ak7eqgt"
-path.bptc="res://.godot/imported/woodbot_WoodEnd.png-7f03368e4130f6d4dee82200a2a5b354.bptc.ctex"
+uid="uid://bju4yyknokx2v"
+path.bptc="res://.godot/imported/Wood.png-9d69939aefba95a405a6e733821b1f43.bptc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={}
 
 [deps]
 
-source_file="res://npcs/woodbot/playermodel/woodbot_WoodEnd.png"
-dest_files=["res://.godot/imported/woodbot_WoodEnd.png-7f03368e4130f6d4dee82200a2a5b354.bptc.ctex"]
+source_file="res://npcs/woodbot/playermodel/Wood.png"
+dest_files=["res://.godot/imported/Wood.png-9d69939aefba95a405a6e733821b1f43.bptc.ctex"]
 
 [params]
 
