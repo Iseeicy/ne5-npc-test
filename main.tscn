@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.virtual-camera/camera_transition.gd" id="2_uarp8"]
 [ext_resource type="PackedScene" uid="uid://cf2idensb8y1s" path="res://ui/ui.tscn" id="3_q0e8w"]
 [ext_resource type="PackedScene" uid="uid://btyrsw5bg3rm3" path="res://maps/test_map/lighthouse/lighthouse.tscn" id="4_goa71"]
-[ext_resource type="PackedScene" path="res://npcs/base_npc.tscn" id="6_bc8n7"]
+[ext_resource type="PackedScene" uid="uid://tisfxscmgpnu" path="res://npcs/base_npc.tscn" id="6_bc8n7"]
 [ext_resource type="PackedScene" uid="uid://dgbb1dlpkqaxu" path="res://npcs/woodbot/woodbot_npc.tscn" id="7_3q5nv"]
 [ext_resource type="Script" path="res://maps/test_map/woodbot_manager.gd" id="8_s4gxj"]
 [ext_resource type="PackedScene" uid="uid://dabdamnnu6vps" path="res://maps/test_map/bot_detour.tscn" id="9_gnkqq"]

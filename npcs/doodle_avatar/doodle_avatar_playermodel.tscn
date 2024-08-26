@@ -1,5 +1,6 @@
-[gd_scene load_steps=25 format=3 uid="uid://d1kki7d5jq0au"]
+[gd_scene load_steps=24 format=3 uid="uid://d1kki7d5jq0au"]
 
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.player-model/player_model_3d.gd" id="1_7xcyg"]
 [ext_resource type="PackedScene" uid="uid://c2nsj55tqp33x" path="res://npcs/doodle_avatar/playermodel/doodle_avatar.gltf" id="1_dr1mp"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xynuc"]
@@ -35,16 +36,6 @@ input_2/name = "interacting"
 input_2/auto_advance = false
 input_2/reset = true
 
-[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_m1ivv"]
-sync = true
-xfade_time = 0.1
-input_0/name = "ground"
-input_0/auto_advance = false
-input_0/reset = true
-input_1/name = "air"
-input_1/auto_advance = false
-input_1/reset = true
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_54525"]
 animation = &"fall"
 
@@ -53,24 +44,24 @@ animation = &"idle_1"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2ae6k"]
 animation = &"walk"
+play_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k28be"]
 animation = &"walk"
-play_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1evoe"]
 animation = &"strafe_right"
+play_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_clfqr"]
 animation = &"strafe_left"
+play_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sd2nh"]
 animation = &"strafe_left"
-play_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7pwj2"]
 animation = &"strafe_right"
-play_mode = 1
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_5qp6l"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_pjhgj")
@@ -88,25 +79,26 @@ blend_point_5/pos = Vector2(-1, -1)
 blend_point_6/node = SubResource("AnimationNodeAnimation_7pwj2")
 blend_point_6/pos = Vector2(1, -1)
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8y4vf"]
-animation = &"idle_1"
-
-[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_kqm5f"]
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_m1ivv"]
+sync = true
+xfade_time = 0.1
+input_0/name = "ground"
+input_0/auto_advance = false
+input_0/reset = true
+input_1/name = "air"
+input_1/auto_advance = false
+input_1/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8corm"]
-graph_offset = Vector2(-197.612, 69.3572)
-nodes/Transition/node = SubResource("AnimationNodeTransition_m1ivv")
-nodes/Transition/position = Vector2(560, 300)
+graph_offset = Vector2(-206.829, 89.5066)
 nodes/fall/node = SubResource("AnimationNodeAnimation_54525")
-nodes/fall/position = Vector2(100, 540)
+nodes/fall/position = Vector2(140, 440)
 nodes/ground/node = SubResource("AnimationNodeBlendSpace2D_5qp6l")
 nodes/ground/position = Vector2(260, 200)
-nodes/not_fall/node = SubResource("AnimationNodeAnimation_8y4vf")
-nodes/not_fall/position = Vector2(100, 400)
 nodes/output/position = Vector2(840, 300)
-nodes/time_in_air/node = SubResource("AnimationNodeBlend2_kqm5f")
-nodes/time_in_air/position = Vector2(260, 440)
-node_connections = [&"output", 0, &"Transition", &"Transition", 0, &"ground", &"Transition", 1, &"time_in_air", &"time_in_air", 0, &"not_fall", &"time_in_air", 1, &"fall"]
+nodes/state/node = SubResource("AnimationNodeTransition_m1ivv")
+nodes/state/position = Vector2(560, 300)
+node_connections = [&"output", 0, &"state", &"state", 0, &"ground", &"state", 1, &"fall"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3qnmf"]
 animation = &"sit_1"
@@ -134,7 +126,7 @@ nodes/state/position = Vector2(146.556, 220.64)
 node_connections = [&"output", 0, &"state", &"state", 0, &"sit_1", &"state", 1, &"sit_2"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_dv3q8"]
-graph_offset = Vector2(-167.235, -35.3826)
+graph_offset = Vector2(-199.962, -57.5391)
 nodes/interacting/node = SubResource("AnimationNodeBlendTree_dwq84")
 nodes/interacting/position = Vector2(40, 320)
 nodes/main_state/node = SubResource("AnimationNodeTransition_x1yp5")
@@ -146,31 +138,34 @@ nodes/sitting/node = SubResource("AnimationNodeBlendTree_b7v3g")
 nodes/sitting/position = Vector2(40, 180)
 node_connections = [&"output", 0, &"main_state", &"main_state", 0, &"movement", &"main_state", 1, &"sitting", &"main_state", 2, &"interacting"]
 
-[node name="DoodleAvatarPlayerModel" type="Node3D"]
+[node name="DoodleAvatarPlayerModel" type="Node3D" node_paths=PackedStringArray("animation_tree")]
+script = ExtResource("1_7xcyg")
+animation_tree = NodePath("AnimationTree")
 
 [node name="doodle_avatar" parent="." instance=ExtResource("1_dr1mp")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="doodle_avatar/doodle_avatar2" index="0"]
-bones/0/position = Vector3(0.00135964, 0.483235, -8.31534e-07)
-bones/0/rotation = Quaternion(-0.0617353, -0.704407, 0.0617354, 0.704407)
-bones/1/rotation = Quaternion(-2.0879e-09, -6.49936e-08, -0.0537092, 0.998557)
-bones/2/rotation = Quaternion(-7.86603e-09, 5.02204e-08, -0.111248, 0.993793)
-bones/4/rotation = Quaternion(1.14529e-07, -1.04709e-07, -0.123997, 0.992283)
-bones/5/rotation = Quaternion(0.138798, 0.110005, 0.983658, 0.0324296)
-bones/6/rotation = Quaternion(-0.000847387, -1.32506e-05, 0.138475, 0.990366)
-bones/7/rotation = Quaternion(-0.000620381, 2.88161e-07, 0.169057, 0.985606)
-bones/8/rotation = Quaternion(-0.99236, -0.0269642, -0.0944575, 0.0746481)
-bones/9/rotation = Quaternion(-0.0012279, 3.44318e-05, -0.0612573, 0.998121)
-bones/10/rotation = Quaternion(0.000404272, 3.65316e-05, -0.0905529, 0.995892)
-bones/12/rotation = Quaternion(0.418691, 0.0521924, -0.0447503, 0.905522)
-bones/13/rotation = Quaternion(-4.99219e-08, 3.75827e-08, 0.230891, 0.97298)
-bones/16/rotation = Quaternion(-0.352267, -0.0460521, -0.0405572, 0.933886)
-bones/17/rotation = Quaternion(-1.63058e-07, -8.43116e-08, 0.23089, 0.97298)
-bones/23/position = Vector3(0.00135964, 1.44199, -8.30461e-07)
+bones/0/position = Vector3(0.00135964, 0.484813, -8.32913e-07)
+bones/0/rotation = Quaternion(-0.0604667, -0.704517, 0.0604668, 0.704517)
+bones/1/rotation = Quaternion(-2.06631e-09, -6.49949e-08, -0.0531576, 0.998586)
+bones/2/rotation = Quaternion(-7.63988e-09, 5.02392e-08, -0.107956, 0.994156)
+bones/4/rotation = Quaternion(1.1447e-07, -1.04691e-07, -0.126238, 0.992)
+bones/5/rotation = Quaternion(0.138738, 0.109794, 0.983564, 0.0360343)
+bones/6/rotation = Quaternion(-0.000855713, -1.33885e-05, 0.139963, 0.990156)
+bones/7/rotation = Quaternion(-0.000625964, 1.6903e-07, 0.170369, 0.98538)
+bones/8/rotation = Quaternion(-0.992484, -0.0224158, -0.0943631, 0.0746206)
+bones/9/rotation = Quaternion(-0.00126053, 3.60575e-05, -0.0638753, 0.997957)
+bones/10/rotation = Quaternion(0.000401018, 3.7957e-05, -0.0933416, 0.995634)
+bones/12/rotation = Quaternion(0.419023, 0.0494617, -0.0388458, 0.905795)
+bones/13/rotation = Quaternion(-4.63713e-08, 3.7736e-08, 0.214315, 0.976765)
+bones/16/rotation = Quaternion(-0.352559, -0.0437546, -0.0344684, 0.93413)
+bones/17/rotation = Quaternion(-1.51343e-07, -8.46415e-08, 0.214315, 0.976765)
+bones/23/position = Vector3(0.00135964, 1.44405, -8.30461e-07)
 bones/25/rotation = Quaternion(0, 0, 1, 0)
-bones/26/position = Vector3(-0.339711, 0.716054, 4.8487e-08)
+bones/26/position = Vector3(-0.339711, 0.718352, 4.8487e-08)
 bones/26/rotation = Quaternion(-0.707107, -1.3411e-07, 0.707107, -1.19209e-07)
-bones/28/position = Vector3(0.338874, 0.771549, 2.52758e-07)
+bones/28/position = Vector3(0.338874, 0.773847, 2.52758e-07)
 bones/28/rotation = Quaternion(0.707107, -1.19209e-07, 0.707107, 1.3411e-07)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
@@ -183,11 +178,10 @@ parameters/interacting/state/current_index = 0
 parameters/main_state/current_state = "in_control"
 parameters/main_state/transition_request = ""
 parameters/main_state/current_index = 0
-parameters/movement/Transition/current_state = "ground"
-parameters/movement/Transition/transition_request = ""
-parameters/movement/Transition/current_index = 0
 parameters/movement/ground/blend_position = Vector2(0, 0)
-parameters/movement/time_in_air/blend_amount = 1.0
+parameters/movement/state/current_state = "ground"
+parameters/movement/state/transition_request = ""
+parameters/movement/state/current_index = 0
 parameters/sitting/state/current_state = "1"
 parameters/sitting/state/transition_request = ""
 parameters/sitting/state/current_index = 0

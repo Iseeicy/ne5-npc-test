@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bysmgnirlwse2" path="res://addons/netengine5/net.bobbo.character/agent_scripts/air_movement_default.tscn" id="6_qwq4m"]
 [ext_resource type="PackedScene" uid="uid://bvw6t0xq1p8v5" path="res://addons/netengine5/net.bobbo.npc/agent_scripts/npc_look.tscn" id="7_girk4"]
 [ext_resource type="PackedScene" uid="uid://bxp6q471n5acx" path="res://npcs/woodbot/woodbot_playermodel.tscn" id="8_qxwc4"]
-[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.player-model/player_model.gd" id="9_g4n3a"]
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.player-model/player_model_renderer_3d.gd" id="9_g4n3a"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.item/item_inventory.gd" id="10_ummaq"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.entity-input/simulated_input.gd" id="11_panht"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.npc/npc_state_machine.gd" id="13_g512q"]
@@ -46,8 +46,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.575, 0)
 
 [node name="PlayerModel" type="Node3D" parent="ModelPivot"]
 script = ExtResource("9_g4n3a")
-
-[node name="WoodbotPlayerModel" parent="ModelPivot/PlayerModel" instance=ExtResource("8_qxwc4")]
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

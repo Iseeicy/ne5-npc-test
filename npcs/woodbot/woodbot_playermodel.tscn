@@ -1,46 +1,90 @@
-[gd_scene load_steps=6 format=3 uid="uid://bxp6q471n5acx"]
+[gd_scene load_steps=13 format=3 uid="uid://bxp6q471n5acx"]
 
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.player-model/player_model_3d.gd" id="1_8u7wk"]
 [ext_resource type="PackedScene" uid="uid://d3gtd5vqpfq55" path="res://npcs/woodbot/playermodel/woodbot.gltf" id="1_fcux3"]
 
-[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_03u10"]
-filter_enabled = true
-filters = ["Woodbot/Skeleton3D:Chassis", "Woodbot/Skeleton3D:Wheel1", "Woodbot/Skeleton3D:Wheel2", "Woodbot/Skeleton3D:Wheel3", "Woodbot/Skeleton3D:Wheel4"]
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_e0yhr"]
+input_0/name = "in_control"
+input_0/auto_advance = false
+input_0/reset = true
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pga6x"]
-animation = &"MoveForward"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sa3ea"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7pufi"]
 animation = &"Idle"
 
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_1dje6"]
-graph_offset = Vector2(-355.886, 86.8299)
-nodes/Blend2/node = SubResource("AnimationNodeBlend2_03u10")
-nodes/Blend2/position = Vector2(78.9324, 105.285)
-nodes/Forward/node = SubResource("AnimationNodeAnimation_pga6x")
-nodes/Forward/position = Vector2(-139.249, 277.103)
-nodes/Idle/node = SubResource("AnimationNodeAnimation_sa3ea")
-nodes/Idle/position = Vector2(-160, 100)
-nodes/output/position = Vector2(440, 100)
-node_connections = [&"output", 0, &"Blend2", &"Blend2", 0, &"Idle", &"Blend2", 1, &"Forward"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4iqhr"]
+animation = &"MoveForward"
+play_mode = 1
 
-[node name="WoodbotPlayerModel" type="Node3D"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lgoyr"]
+animation = &"MoveForward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5n2f0"]
+animation = &"MoveForward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4vk2x"]
+animation = &"MoveForward"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_i5axy"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_7pufi")
+blend_point_0/pos = Vector2(0, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_4iqhr")
+blend_point_1/pos = Vector2(0, 1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_lgoyr")
+blend_point_2/pos = Vector2(0, -1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_5n2f0")
+blend_point_3/pos = Vector2(-1, 0)
+blend_point_4/node = SubResource("AnimationNodeAnimation_4vk2x")
+blend_point_4/pos = Vector2(1, 0)
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_db0wb"]
+input_0/name = "ground"
+input_0/auto_advance = false
+input_0/reset = true
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8yogg"]
+graph_offset = Vector2(1, 0)
+nodes/ground/node = SubResource("AnimationNodeBlendSpace2D_i5axy")
+nodes/ground/position = Vector2(160, 200)
+nodes/output/position = Vector2(780, 200)
+nodes/state/node = SubResource("AnimationNodeTransition_db0wb")
+nodes/state/position = Vector2(480, 200)
+node_connections = [&"output", 0, &"state", &"state", 0, &"ground"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_1dje6"]
+graph_offset = Vector2(-272.886, -38.1701)
+nodes/main_state/node = SubResource("AnimationNodeTransition_e0yhr")
+nodes/main_state/position = Vector2(372.212, 126.956)
+nodes/movement/node = SubResource("AnimationNodeBlendTree_8yogg")
+nodes/movement/position = Vector2(40, 120)
+nodes/output/position = Vector2(660, 140)
+node_connections = [&"output", 0, &"main_state", &"main_state", 0, &"movement"]
+
+[node name="WoodbotPlayerModel" type="Node3D" node_paths=PackedStringArray("animation_tree")]
+script = ExtResource("1_8u7wk")
+animation_tree = NodePath("AnimationTree")
 
 [node name="woodbot" parent="." instance=ExtResource("1_fcux3")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="woodbot/Woodbot" index="0"]
-bones/0/position = Vector3(0, 0.00845445, 0)
-bones/0/rotation = Quaternion(0, 0, 0.00134645, 0.999999)
-bones/1/rotation = Quaternion(0.631069, -7.48553e-11, -1.64069e-12, 0.775726)
-bones/3/rotation = Quaternion(0.0321168, -0.0321168, 0.706377, 0.706377)
-bones/4/rotation = Quaternion(0.0321168, -0.0321168, 0.706377, 0.706377)
-bones/5/rotation = Quaternion(0.0321168, -0.0321168, 0.706377, 0.706377)
-bones/6/rotation = Quaternion(-0.0321168, 0.0321168, -0.706377, -0.706377)
+bones/0/position = Vector3(0, 0.02776, 0)
+bones/0/rotation = Quaternion(-0.0433326, 7.39466e-05, -0.00169366, 0.999059)
+bones/1/rotation = Quaternion(0.929603, 3.02857e-11, 9.38421e-11, 0.368562)
+bones/3/rotation = Quaternion(0.0756119, -0.0756118, 0.703053, 0.703053)
+bones/4/rotation = Quaternion(0.0756119, -0.0756118, 0.703053, 0.703053)
+bones/5/rotation = Quaternion(0.0756119, -0.0756118, 0.703053, 0.703053)
+bones/6/rotation = Quaternion(-0.0756119, 0.0756119, -0.703053, -0.703053)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_1dje6")
 anim_player = NodePath("../woodbot/AnimationPlayer")
 active = true
-parameters/Blend2/blend_amount = 0.0
+parameters/main_state/current_state = "in_control"
+parameters/main_state/transition_request = ""
+parameters/main_state/current_index = 0
+parameters/movement/ground/blend_position = Vector2(-0.000913262, -0.992509)
+parameters/movement/state/current_state = "ground"
+parameters/movement/state/transition_request = ""
+parameters/movement/state/current_index = 0
 
 [editable path="woodbot"]
