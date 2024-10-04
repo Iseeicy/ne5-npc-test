@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dgbb1dlpkqaxu"]
+[gd_scene load_steps=19 format=3 uid="uid://dgbb1dlpkqaxu"]
 
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.npc/npc_agent_3d.gd" id="1_ynkuu"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.character/character_definition.gd" id="2_4bgw4"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.npc/npc_state.gd" id="14_3qh74"]
 [ext_resource type="Script" path="res://npcs/woodbot/npc_states/go_to_detour.gd" id="14_wpu4s"]
 [ext_resource type="Script" path="res://npcs/woodbot/npc_states/go_to_lighthouse.gd" id="15_n2kwi"]
+[ext_resource type="Script" path="res://npcs/woodbot/npc_states/attack_lighthouse.gd" id="16_j43ag"]
 
 [sub_resource type="Resource" id="Resource_0lbri"]
 script = ExtResource("2_4bgw4")
@@ -74,3 +75,6 @@ script = ExtResource("14_wpu4s")
 
 [node name="GoToLighthouse" type="Node" parent="NPCStateMachine"]
 script = ExtResource("15_n2kwi")
+
+[node name="AttackLighthouse" type="Node" parent="NPCStateMachine"]
+script = ExtResource("16_j43ag")
