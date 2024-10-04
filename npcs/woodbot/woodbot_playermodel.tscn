@@ -12,6 +12,7 @@ mix_mode = 1
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_e0yhr"]
 input_0/name = "in_control"
 input_0/auto_advance = false
+input_0/break_loop_at_end = false
 input_0/reset = true
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7pufi"]
@@ -45,6 +46,7 @@ blend_point_4/pos = Vector2(1, 0)
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_db0wb"]
 input_0/name = "ground"
 input_0/auto_advance = false
+input_0/break_loop_at_end = false
 input_0/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8yogg"]
@@ -67,7 +69,7 @@ nodes/main_state/position = Vector2(400, 120)
 nodes/movement/node = SubResource("AnimationNodeBlendTree_8yogg")
 nodes/movement/position = Vector2(40, 120)
 nodes/output/position = Vector2(1080, 100)
-node_connections = [&"output", 0, &"attack_1", &"main_state", 0, &"movement", &"attack_1", 0, &"main_state", &"attack_1", 1, &"attack"]
+node_connections = [&"attack_1", 0, &"main_state", &"attack_1", 1, &"attack", &"main_state", 0, &"movement", &"output", 0, &"attack_1"]
 
 [node name="WoodbotPlayerModel" type="Node3D" node_paths=PackedStringArray("animation_tree")]
 script = ExtResource("1_8u7wk")
@@ -76,10 +78,15 @@ animation_tree = NodePath("AnimationTree")
 [node name="woodbot" parent="." instance=ExtResource("1_fcux3")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
+[node name="Skeleton3D" parent="woodbot/Woodbot" index="0"]
+bones/3/rotation = Quaternion(-0.5, 0.5, 0.5, 0.5)
+bones/4/rotation = Quaternion(-0.5, 0.5, 0.5, 0.5)
+bones/5/rotation = Quaternion(-0.5, 0.5, 0.5, 0.5)
+
 [node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../woodbot")
 tree_root = SubResource("AnimationNodeBlendTree_1dje6")
 anim_player = NodePath("../woodbot/AnimationPlayer")
-active = true
 parameters/attack_1/active = false
 parameters/attack_1/internal_active = false
 parameters/attack_1/request = 0

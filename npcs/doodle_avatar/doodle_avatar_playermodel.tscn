@@ -9,6 +9,7 @@ animation = &"interact_generic_1"
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_p50wo"]
 input_0/name = "1"
 input_0/auto_advance = false
+input_0/break_loop_at_end = false
 input_0/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_dwq84"]
@@ -28,12 +29,15 @@ xfade_time = 0.15
 xfade_curve = SubResource("Curve_wuhgp")
 input_0/name = "in_control"
 input_0/auto_advance = false
+input_0/break_loop_at_end = false
 input_0/reset = true
 input_1/name = "sitting"
 input_1/auto_advance = false
+input_1/break_loop_at_end = false
 input_1/reset = true
 input_2/name = "interacting"
 input_2/auto_advance = false
+input_2/break_loop_at_end = false
 input_2/reset = true
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_54525"]
@@ -84,9 +88,11 @@ sync = true
 xfade_time = 0.1
 input_0/name = "ground"
 input_0/auto_advance = false
+input_0/break_loop_at_end = false
 input_0/reset = true
 input_1/name = "air"
 input_1/auto_advance = false
+input_1/break_loop_at_end = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8corm"]
@@ -109,9 +115,11 @@ animation = &"sit_2"
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_5y4a7"]
 input_0/name = "1"
 input_0/auto_advance = false
+input_0/break_loop_at_end = false
 input_0/reset = true
 input_1/name = "2"
 input_1/auto_advance = false
+input_1/break_loop_at_end = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_b7v3g"]
@@ -136,7 +144,7 @@ nodes/movement/position = Vector2(40, 40)
 nodes/output/position = Vector2(1140, 20)
 nodes/sitting/node = SubResource("AnimationNodeBlendTree_b7v3g")
 nodes/sitting/position = Vector2(40, 180)
-node_connections = [&"output", 0, &"main_state", &"main_state", 0, &"movement", &"main_state", 1, &"sitting", &"main_state", 2, &"interacting"]
+node_connections = [&"main_state", 0, &"movement", &"main_state", 1, &"sitting", &"main_state", 2, &"interacting", &"output", 0, &"main_state"]
 
 [node name="DoodleAvatarPlayerModel" type="Node3D" node_paths=PackedStringArray("animation_tree")]
 script = ExtResource("1_7xcyg")
@@ -162,16 +170,15 @@ bones/13/rotation = Quaternion(-4.63713e-08, 3.7736e-08, 0.214315, 0.976765)
 bones/16/rotation = Quaternion(-0.352559, -0.0437546, -0.0344684, 0.93413)
 bones/17/rotation = Quaternion(-1.51343e-07, -8.46415e-08, 0.214315, 0.976765)
 bones/23/position = Vector3(0.00135964, 1.44405, -8.30461e-07)
-bones/25/rotation = Quaternion(0, 0, 1, 0)
 bones/26/position = Vector3(-0.339711, 0.718352, 4.8487e-08)
 bones/26/rotation = Quaternion(-0.707107, -1.3411e-07, 0.707107, -1.19209e-07)
 bones/28/position = Vector3(0.338874, 0.773847, 2.52758e-07)
 bones/28/rotation = Quaternion(0.707107, -1.19209e-07, 0.707107, 1.3411e-07)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../doodle_avatar")
 tree_root = SubResource("AnimationNodeBlendTree_dv3q8")
 anim_player = NodePath("../doodle_avatar/AnimationPlayer")
-active = true
 parameters/interacting/state/current_state = "1"
 parameters/interacting/state/transition_request = ""
 parameters/interacting/state/current_index = 0
