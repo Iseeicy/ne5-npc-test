@@ -1,7 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://bxp6q471n5acx"]
+[gd_scene load_steps=15 format=3 uid="uid://bxp6q471n5acx"]
 
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.player-model/player_model_3d.gd" id="1_8u7wk"]
 [ext_resource type="PackedScene" uid="uid://d3gtd5vqpfq55" path="res://npcs/woodbot/playermodel/woodbot.gltf" id="1_fcux3"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rdxrm"]
+animation = &"Attack"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_i4wab"]
+mix_mode = 1
 
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_e0yhr"]
 input_0/name = "in_control"
@@ -51,13 +57,17 @@ nodes/state/position = Vector2(480, 200)
 node_connections = [&"output", 0, &"state", &"state", 0, &"ground"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_1dje6"]
-graph_offset = Vector2(-272.886, -38.1701)
+graph_offset = Vector2(-131.677, 40.9758)
+nodes/attack/node = SubResource("AnimationNodeAnimation_rdxrm")
+nodes/attack/position = Vector2(530.2, 409.2)
+nodes/attack_1/node = SubResource("AnimationNodeOneShot_i4wab")
+nodes/attack_1/position = Vector2(720, 140)
 nodes/main_state/node = SubResource("AnimationNodeTransition_e0yhr")
-nodes/main_state/position = Vector2(372.212, 126.956)
+nodes/main_state/position = Vector2(400, 120)
 nodes/movement/node = SubResource("AnimationNodeBlendTree_8yogg")
 nodes/movement/position = Vector2(40, 120)
-nodes/output/position = Vector2(660, 140)
-node_connections = [&"output", 0, &"main_state", &"main_state", 0, &"movement"]
+nodes/output/position = Vector2(1080, 100)
+node_connections = [&"output", 0, &"attack_1", &"main_state", 0, &"movement", &"attack_1", 0, &"main_state", &"attack_1", 1, &"attack"]
 
 [node name="WoodbotPlayerModel" type="Node3D" node_paths=PackedStringArray("animation_tree")]
 script = ExtResource("1_8u7wk")
@@ -66,23 +76,17 @@ animation_tree = NodePath("AnimationTree")
 [node name="woodbot" parent="." instance=ExtResource("1_fcux3")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
-[node name="Skeleton3D" parent="woodbot/Woodbot" index="0"]
-bones/0/position = Vector3(0, 0.02776, 0)
-bones/0/rotation = Quaternion(-0.0433326, 7.39466e-05, -0.00169366, 0.999059)
-bones/1/rotation = Quaternion(0.929603, 3.02857e-11, 9.38421e-11, 0.368562)
-bones/3/rotation = Quaternion(0.0756119, -0.0756118, 0.703053, 0.703053)
-bones/4/rotation = Quaternion(0.0756119, -0.0756118, 0.703053, 0.703053)
-bones/5/rotation = Quaternion(0.0756119, -0.0756118, 0.703053, 0.703053)
-bones/6/rotation = Quaternion(-0.0756119, 0.0756119, -0.703053, -0.703053)
-
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeBlendTree_1dje6")
 anim_player = NodePath("../woodbot/AnimationPlayer")
 active = true
+parameters/attack_1/active = false
+parameters/attack_1/internal_active = false
+parameters/attack_1/request = 0
 parameters/main_state/current_state = "in_control"
 parameters/main_state/transition_request = ""
 parameters/main_state/current_index = 0
-parameters/movement/ground/blend_position = Vector2(-0.000913262, -0.992509)
+parameters/movement/ground/blend_position = Vector2(0, 0)
 parameters/movement/state/current_state = "ground"
 parameters/movement/state/transition_request = ""
 parameters/movement/state/current_index = 0
